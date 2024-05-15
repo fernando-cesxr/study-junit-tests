@@ -1,13 +1,34 @@
 package br.com.fernando;
 
 import jdk.jfr.Frequency;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class SimpleMathTest {
+
+    SimpleMath math;
+
+    @BeforeAll
+    static void setup(){
+        System.out.println("Running @BeforeAll method");
+    }
+
+    @AfterAll
+    static  void cleanup(){
+        System.out.println("Running @AfterAll method");
+    }
+
+    @BeforeEach
+    void beforeEachMethod(){
+        math = new SimpleMath();
+    }
+
+//    @AfterEach
+//    void afterEachMethod(){
+//        System.out.println("Running @AfterEach method");
+//    }
+
 
     // Given When Then - GWT é mais utilizado para negócios por ser mais legível para um não programador ler
     // Arrange Act Assert - AAA é mais utlizado para testar de fato as funcoes de um programa, não se importando com a legibilidade de um não programador
@@ -15,9 +36,8 @@ class SimpleMathTest {
     @DisplayName("Test 6.2 + 2 = 8.2")
 
     //test[System Under Test]_When_[Condition or state change]_[Expected result]
-    void testSum_When_SixDotTwoIsAddedByTwo_ShouldReturnEightDotTwo(){
+    void testSum_When_SixPointTwoIsAddedByTwo_ShouldReturnEightPointTwo(){
         // Given / Arrange
-        SimpleMath math = new SimpleMath();
         double firstNumber = 6.2D;
         double secondNumber = 2D;
         double expected = 8.2;
@@ -31,8 +51,7 @@ class SimpleMathTest {
 
     @Test
     @DisplayName("Test 6.2 + 2 != 9.2")
-    void testSum_When_SixDotTwoIsAddedByTwo_ExpectedNineDotTwo(){
-        SimpleMath math = new SimpleMath();
+    void testSum_When_SixDotTwoIsAddedByTwo_ShouldntReturnNinePointTwo(){
         double firstNumber = 6.2D;
         double secondNumber = 2D;
         double expected = 9.2;
@@ -44,8 +63,7 @@ class SimpleMathTest {
 
     @Test
     @DisplayName("Test 6.2 + 2 != null")
-    void testSimpleMathSumNotNull(){
-        SimpleMath math = new SimpleMath();
+    void testSum_When_SixPointTwoIsAddedByTwo_ShouldntReturnNull(){
         double firstNumber = 6.2D;
         double secondNumber = 2D;
         Double result = math.sum(firstNumber, secondNumber);
@@ -55,9 +73,7 @@ class SimpleMathTest {
 
     @Test
     @DisplayName("Test 5 - 4 = 1")
-    void testSimpleMathSubtractionEqual(){
-        SimpleMath math = new SimpleMath();
-
+    void testSum_When_FiveMinusFour_ShouldReturnOne(){
         double firstNumber = 5D;
         double secondNumber = 4D;
         double expected = 1;
@@ -69,8 +85,7 @@ class SimpleMathTest {
 
     @Test
     @DisplayName("Test 5-4 != 2")
-    void testSimpleMathSubtractionNotEqual(){
-        SimpleMath math = new SimpleMath();
+    void testSum_When_FiveMinusFour_ShouldntReturnTwo(){
         double firstNumber = 5D;
         double secondNumber = 4D;
         double expected = 2;
@@ -82,8 +97,7 @@ class SimpleMathTest {
 
     @Test
     @DisplayName("Test 5-4 != null ")
-    void testSimpleMathSubtractionNotNull(){
-        SimpleMath math = new SimpleMath();
+    void testSum_When_FiveMinusFour_ShouldntReturnNull(){
         double firstNumber = 5D;
         double secondNumber = 4D;
         double result = math.subtraction(firstNumber, secondNumber);
@@ -93,8 +107,7 @@ class SimpleMathTest {
 
     @Test
     @DisplayName("Test 2*3 = 6")
-    void testSimpleMathMultiplicationEqual(){
-        SimpleMath math = new SimpleMath();
+    void testSum_When_TwoMultipliedByThree_ShouldReturnSix(){
         double firstNumber = 2;
         double secondNumber = 3;
         double expected = 6;
@@ -105,8 +118,7 @@ class SimpleMathTest {
 
     @Test
     @DisplayName("Test 2*3 != 7")
-    void testSimpleMathMultiplicationNotEqual(){
-        SimpleMath math = new SimpleMath();
+    void testSum_When_TwoMultipliedByThree_ShouldntReturnSeven(){
         double firstNumber = 2;
         double secondNumber = 3;
         double expected = 7;
@@ -117,8 +129,7 @@ class SimpleMathTest {
 
     @Test
     @DisplayName("Test 2*3 != null")
-    void testSimpleMathMultiplicationNotNull(){
-        SimpleMath math = new SimpleMath();
+    void testSum_When_TwoMultipliedByThree_ShouldntReturnNull(){
         double firstNumber = 2;
         double secondNumber = 3;
         double result = math.multiplication(firstNumber, secondNumber);
@@ -128,8 +139,7 @@ class SimpleMathTest {
 
     @Test
     @DisplayName("Test 10/5 = 2")
-    void testSimpleMathDivisionEqual(){
-        SimpleMath math = new SimpleMath();
+    void testDivision_When_TenDividedByFive_ShouldReturnTwo(){
         double firstNumber = 10;
         double secondNumber = 5;
         double expected = 2;
@@ -138,10 +148,16 @@ class SimpleMathTest {
         assertEquals(expected, result, () ->  firstNumber + " / " + secondNumber + " did not produce " + expected);
     }
 
+    @Disabled("TODO: We need to work on it")
+    @Test
+    @DisplayName("Test Division by zero")
+    void testDivision_When_DividedByZero_ShouldThrowArithmeticError(){
+        fail();
+    }
+
     @Test
     @DisplayName("Test 10/5 != 3")
-    void testSimpleMathDivisonNotEqual(){
-        SimpleMath math = new SimpleMath();
+    void testDivision_When_TenDividedByFive_ShouldntReturnThree(){
         double firstNumber = 10;
         double secondNumber = 5;
         double expected = 3;
@@ -152,8 +168,7 @@ class SimpleMathTest {
 
     @Test
     @DisplayName("Test 10/5 != null")
-    void testSimpleMathDivisionNotNull(){
-        SimpleMath math = new SimpleMath();
+    void testDivision_When_TenDividedByFive_ShouldntReturnNull(){
         double firstNumber = 10;
         double secondNumber = 5;
         double result = math.division(firstNumber, secondNumber);
@@ -163,8 +178,7 @@ class SimpleMathTest {
 
     @Test
     @DisplayName("Test (10 + 10)/2 = 10")
-    void testSimpleMathMeanEqual(){
-        SimpleMath math = new SimpleMath();
+    void testMean_When_TenPlusTenDividedByTwo_ShouldReturnTen(){
         double firstNumber = 10;
         double secondNumber = 10;
         double expected = 10;
@@ -175,8 +189,7 @@ class SimpleMathTest {
 
     @Test
     @DisplayName("Test (10 + 10)/2 != 11")
-    void testSimpleMathMeanNotEqual(){
-        SimpleMath math = new SimpleMath();
+    void testMean_When_TenPlusTenDividedByTwo_ShouldntReturnEleven(){
         double firstNumber = 10;
         double secondNumber = 10;
         double expected = 11;
@@ -187,8 +200,7 @@ class SimpleMathTest {
 
     @Test
     @DisplayName("Test (10 + 10)/2 != null")
-    void testSimpleMathMeanNotNull(){
-        SimpleMath math = new SimpleMath();
+    void testMean_When_TenPlusTenDividedByTwo_ShouldntReturnNull(){
         double firstNumber = 10;
         double secondNumber = 10;
         double result = math.mean(firstNumber, secondNumber);
@@ -198,8 +210,7 @@ class SimpleMathTest {
 
     @Test
     @DisplayName("Test Square Root 16 = 4")
-    void testSimpleMathSquareRootEqual(){
-        SimpleMath math = new SimpleMath();
+    void testSquareRoot_When_SquareRootOfSixteen_ShouldReturnFour(){
         double number = 16;
         double expected = 4;
         double result = math.squareRoot(number);
@@ -209,8 +220,7 @@ class SimpleMathTest {
 
     @Test
     @DisplayName("Test Square Root 16 != 5")
-    void testSimpleMathSquareRootNotEqual(){
-        SimpleMath math = new SimpleMath();
+    void testSquareRoot_When_SquareRootOfSixteen_ShouldntReturnFive(){
         double number = 16;
         double expected = 5;
         double result = math.squareRoot(number);
@@ -220,8 +230,7 @@ class SimpleMathTest {
 
     @Test
     @DisplayName("Test Square Root 16 != null")
-    void testSimpletMathSquareRootNotNull(){
-        SimpleMath math = new SimpleMath();
+    void testSquareRoot_When_SquareRootOfSixteen_ShouldntReturnNull(){
         double number = 16;
         double result = math.squareRoot(number);
 
