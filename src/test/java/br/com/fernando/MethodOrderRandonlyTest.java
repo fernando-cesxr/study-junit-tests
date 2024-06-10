@@ -5,9 +5,12 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-@Order(4)
-@TestMethodOrder(MethodOrderer.MethodName.class)
-class MethodOrderByNameTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+
+@Order(3)
+@TestMethodOrder(MethodOrderer.Random.class)
+class MethodOrderRandonlyTest {
 
     @Test
     void testA(){
@@ -20,13 +23,14 @@ class MethodOrderByNameTest {
     }
 
     @Test
+    void testC(){
+        System.out.println("Running test C");
+    }
+
+    @Test
     void testD(){
         System.out.println("Running test D");
     }
 
-    @Test
-    void testC(){
-        System.out.println("Running test C");
-    }
 
 }

@@ -1,6 +1,6 @@
 package br.com.fernando;
 
-public class SimpleMath {
+public class SimpleMathS3 {
 
     public Double sum(Double firstNumber, Double secondNumber) {
         return firstNumber + secondNumber;
